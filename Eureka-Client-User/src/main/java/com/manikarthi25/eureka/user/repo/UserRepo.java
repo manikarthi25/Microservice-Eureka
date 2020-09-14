@@ -9,5 +9,7 @@ import com.manikarthi25.eureka.user.entity.UserEO;
 public interface UserRepo extends CrudRepository<UserEO, Long> {
 
 	UserEO findByEmail(String username);
-	
+
+	UserEO findByUserId(String userId);
+
 }
