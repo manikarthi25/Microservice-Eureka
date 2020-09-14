@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.manikarthi25.eureka.albums</groupId>
-    <artifactId>PEureka-Client-Albums</artifactId>
+    <artifactId>EurekaClientAlbums</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>Eureka-Client-Albums</name>
+    <name>EurekaClientAlbums</name>
     <description>Eureka Client Albums</description>
 
     <properties>
