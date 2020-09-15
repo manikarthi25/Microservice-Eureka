@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	// private RestTemplate restTemplate;
 	private Environment environment;
-	private AlbumServiceClient albumServiceClient;
+	AlbumServiceClient albumServiceClient;
 
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -96,7 +96,7 @@ public class UserServiceImpl implements UserService {
 		 */
 		List<AlbumResponseModel> albumsList = null;
 		try {
-			albumsList = albumServiceClient.getAblums(userId);
+			albumsList = albumServiceClient.getAlbums(userId);
 		} catch (FeignException e) {
 			logger.error(e.getLocalizedMessage());
 		}
