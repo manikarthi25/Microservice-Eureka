@@ -24,7 +24,7 @@ import com.manikarthi25.eureka.albums.service.AlbumsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 @RestController
-@RequestMapping("/users/{id}/albums")
+@RequestMapping("/user/{id}/albums")
 public class AlbumsController {
     
     @Autowired

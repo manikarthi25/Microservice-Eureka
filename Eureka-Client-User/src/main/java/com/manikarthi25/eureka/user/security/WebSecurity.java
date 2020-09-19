@@ -2,7 +2,9 @@ package com.manikarthi25.eureka.user.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -10,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.manikarthi25.eureka.user.service.UserService;
 
-@Configuration
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
@@ -18,8 +20,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	private UserService userService;
 	private Environment environment;
 
-	public WebSecurity(BCryptPasswordEncoder bCryptPasswordEncoder, UserService userService,
-			Environment environment) {
+	public WebSecurity(BCryptPasswordEncoder bCryptPasswordEncoder, UserService userService, Environment environment) {
 		this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 		this.userService = userService;
 		this.environment = environment;
@@ -28,8 +29,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity.csrf().disable();
-		httpSecurity.authorizeRequests().antMatchers("/user/**").permitAll().and()
-				.addFilter(getAuthenticationFilter());
+		httpSecurity.authorizeRequests().antMatchers(HttpMethod.POST, "/user/**").permitAll()
+				.antMatchers(environment.getProperty("h2console.url")).permitAll()
+				.anyRequest().authenticated().and()
+				.addFilter(getAuthenticationFilter())
+				.addFilter(new AuthorizationFilter(environment, authenticationManager()));
 		httpSecurity.headers().frameOptions().disable();
 	}
 

@@ -13,7 +13,7 @@ import com.manikarthi25.eureka.user.response.model.AlbumResponseModel;
 @FeignClient(name = "album-ms", fallback = AlbumsServiceClientFallback.class)
 public interface AlbumServiceClient {
 
-	@GetMapping("/users/{id}/albums")
+	@GetMapping("/user/{id}/albums")
 	public List<AlbumResponseModel> getAlbums(@PathVariable String id);
 
 }
