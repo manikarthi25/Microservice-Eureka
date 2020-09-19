@@ -1,6 +1,9 @@
 package com.manikarthi25.eureka.user.dto;
 
 import java.io.Serializable;
+import java.util.List;
+
+import com.manikarthi25.eureka.user.response.model.AlbumResponseModel;
 
 public class UserDTO implements Serializable {
 
@@ -12,6 +15,7 @@ public class UserDTO implements Serializable {
 	private String password;
 	private String userId;
 	private String encryptedPassword;
+	private List<AlbumResponseModel> albumsList;
 
 	public String getFirstName() {
 		return firstName;
@@ -59,6 +63,14 @@ public class UserDTO implements Serializable {
 
 	public void setEncryptedPassword(String encryptedPassword) {
 		this.encryptedPassword = encryptedPassword;
+	}
+
+	public List<AlbumResponseModel> getAlbumsList() {
+		return albumsList;
+	}
+
+	public void setAlbumsList(List<AlbumResponseModel> albumsList) {
+		this.albumsList = albumsList;
 	}
 
 }
